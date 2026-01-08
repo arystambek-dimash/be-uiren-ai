@@ -145,7 +145,7 @@ async def get_roadmap_detail(
                 mutable_dict = w.dict()
                 mutable_dict["edge_id"] = edge_id
                 try:
-                    await study_word_repo.create(**mutable_dict)
+                    generated_words.append(await study_word_repo.create(**mutable_dict))
                 except Exception as e:
                     raise HTTPException(500, f"AI Error: {str(e)}")
             generated_questions = []
@@ -154,7 +154,7 @@ async def get_roadmap_detail(
                 mutable_dict["edge_id"] = edge_id
                 mutable_dict["content"] = q.content.dict()
                 try:
-                    await question_repo.create(**mutable_dict)
+                    generated_questions.append(await question_repo.create(**mutable_dict))
                 except Exception as e:
                     raise HTTPException(500, f"AI Error: {str(e)}")
 
